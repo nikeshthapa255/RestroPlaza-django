@@ -50,17 +50,13 @@ class RestaurantView(generics.CreateAPIView):
 
     def post(self, request):
         print(request.data)
-        try:
-            owner = User.objects.get(pk=request.data.get("user",1)).owner
-            print(owner,"it already has")
-            return response.Response({"error":"user already define"}, status=status.HTTP_400_BAD_REQUEST)
-        except:    
-            serializer = OwnerSerializer(data=request.data)
-            if serializer.is_valid():
-                serializer.save(user=request.user)
-                return response.Response(serializer.data, status=status.HTTP_201_CREATED)
-            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+        print(dir(User.objects.get(pk=request.data.get("user"))))
+        serializer = OwnerSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(user=request.user)
+            return response.Response(serializer.data, status=status.HTTP_201_CREATED)
+        return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 # get restaurant by token
