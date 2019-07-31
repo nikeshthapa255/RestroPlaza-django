@@ -51,7 +51,7 @@ class RestaurantView(generics.CreateAPIView):
     def post(self, request):
         print(request.data)
         try:
-            owner = request.user.owner
+            owner = User.objects.get(pk=request.data.get("user",1)).owner
             print(owner,"it already has")
             return response.Response({"error":"user already define"}, status=status.HTTP_400_BAD_REQUEST)
         except:    
