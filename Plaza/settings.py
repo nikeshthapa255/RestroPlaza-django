@@ -25,7 +25,7 @@ SECRET_KEY = '-16t!p=zr1c!1piv(71=5byyelf9=bdqg_0-xb^blpwxii@(^@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['http://localhost:3000/',"127.0.0.1"]
+ALLOWED_HOSTS = ['http://localhost:3000/',"127.0.0.1","restroplaza.herokuapp.com",]
 CORS_ORIGIN_ALLOW_ALL = True
 
 
