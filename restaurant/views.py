@@ -53,7 +53,7 @@ class RestaurantView(generics.CreateAPIView):
         print(dir(User.objects.get(pk=request.data.get("user"))))
         serializer = OwnerSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
+            serializer.save()
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
