@@ -49,6 +49,7 @@ class RestaurantView(generics.CreateAPIView):
         return response.Response(data)
 
     def post(self, request):
+        print(request.data)
         serializer = OwnerSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(user=request.user)
