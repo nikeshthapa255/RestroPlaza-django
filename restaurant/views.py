@@ -53,7 +53,7 @@ class RestaurantView(generics.CreateAPIView):
         try:
             owner = request.user.owner
             print(owner,"it already has")
-            return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return response.Response({"error":"user already define"}, status=status.HTTP_400_BAD_REQUEST)
         except:    
             serializer = OwnerSerializer(data=request.data)
             if serializer.is_valid():

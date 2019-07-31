@@ -25,8 +25,9 @@ SECRET_KEY = '-16t!p=zr1c!1piv(71=5byyelf9=bdqg_0-xb^blpwxii@(^@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['http://localhost:3000/',"127.0.0.1"]
 CORS_ORIGIN_ALLOW_ALL = True
+
 
 
 # Application definition
@@ -41,7 +42,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'restaurant',
-    'django_cleanup'
+    'django_cleanup',
+    
 ]
 
 MIDDLEWARE = [
