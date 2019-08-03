@@ -35,6 +35,22 @@ class IsUpdateProfile(permissions.BasePermission):
 
         return False
 
+class IsUpdateProfile2(permissions.BasePermission):
+
+    def has_permission(self, request, view):
+        # can write custom code
+        print(view.kwargs, "Owner Check")
+        try:
+            user_profile = Owner.objects.get(
+                pk=view.kwargs['pk'])
+        except:
+            return False
+        # print(Dishes.objects.get(pk=view.kwargs['pk']))
+
+        if request.user.owner == user_profile:
+            return True
+
+        return False
 
 #restaurant get, post new restaurant
 
@@ -57,6 +73,14 @@ class RestaurantView(generics.CreateAPIView):
             return response.Response(serializer.data, status=status.HTTP_201_CREATED)
         return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+#restaurnat put and delete
+class RestaurantDetailView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class= OwnerSerializer
+    permission_classes= (IsAuthenticated, IsUpdateProfile2)
+    def get_queryset(self):
+        print(self.kwargs, "QUERY")
+        return Owner.objects.filter(pk=self.kwargs["pk"])
 
 
 # get restaurant by token
